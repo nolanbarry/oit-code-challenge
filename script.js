@@ -31,9 +31,12 @@ let app = new Vue({
       } else if (count == 4 && power.r != 'm') {  // i.e. 4 = IV (5 - 1)
         result = power.r + this.neighborBy(power, 1).r;
       } else {                                          // i.e III (3) or VI (6)
-        if (count >= 5 && power.r != 'm') // replaces first 5 numerals with 5 power if applicable
+        if (count >= 5 && power.r != 'm') {// replaces first 5 numerals with 5 power if applicable
           result = this.neighborBy(power, 1).r;
-        result += power.r.repeat(count % 5);
+          result += power.r.repeat(count % 5);
+        } else {
+          result += power.r.repeat(count);
+        }
       }
       return result + this.toRomanNumeral(num - count * power.d);
     },
@@ -66,13 +69,15 @@ let app = new Vue({
       // checks to see if input contains roman numerals
       let validNumerals = ['i', 'v', 'x', 'l', 'c', 'd', 'm']
       if (Array.from(this.input).reduce((current, char) => validNumerals.includes(char.toLowerCase()) ? current : false, true)) {
-        console.log('numeral')
         this.result = this.fromRomanNumeral(this.input);
       } else if (parseInt(this.input) + "" == this.input) { // checks if input contains an integer
-        console.log(this.input)
         this.result = this.toRomanNumeral(this.input).toUpperCase();
       } else { // otherwise input is invalid
         this.result = "";
+      }
+      if (this.result.length > 30) {
+        console.log(this.result);
+        this.result = "Input too large";
       }
     }
   }
