@@ -5,17 +5,16 @@
   <meta charset="utf-8">
   <title>Nolan Barry OIT Programming Assignment</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body id="home">
   <div id='app'>
-    <div class='container'>
-      <input type='text' v-model="fromInput" @keyUp="convertFrom" />
-      <p>{{from}}</p>
-    </div>
-    <div class='container'>
-      <input type='text' v-model="toInput" @keyUp="convertTo" />
-      <p>{{to}}</p>
+    <div id='content'>
+      <h1>convert to/from roman numeral:</h1>
+      <input type='text' v-model="input" @keyUp="convert" />
+      <p>{{result}}</p>
     </div>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>

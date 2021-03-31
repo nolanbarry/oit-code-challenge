@@ -10,10 +10,8 @@ const conversion = [
 let app = new Vue({
   el: '#app',
   data: {
-    from: "",
-    to: "",
-    fromInput: "",
-    toInput: "",
+    input: "",
+    result: ""
   },
   methods: {
     toRomanNumeral(num) {
@@ -59,23 +57,23 @@ let app = new Vue({
     neighborBy(convObj, n) {
       return conversion[conversion.findIndex(x => x.r == convObj.r) + n];
     },
-    // functions for buttons
-    convertFrom() {
-      // only checks to make sure characters are roman numerals
-      // otherwise assumers order is correct
-      let valid = true;
-      Array.from(this.fromInput).forEach(char => {
-        if (conversion.findIndex(value => value.r == char.toLowerCase()) == -1) {
-          valid = false;
-        }
-      });
-      if (valid) this.from = this.fromRomanNumeral(this.fromInput);
-      else this.from = "";
-    },
-    convertTo() {
-      if (parseInt(this.toInput) + "" == this.toInput)
-        this.to = this.toRomanNumeral(this.toInput).toUpperCase();
-      else this.to = "";
+    // button function
+    convert() {
+      if (this.input == "") {
+        this.result = "";
+        return;
+      }
+      // checks to see if input contains roman numerals
+      let validNumerals = ['i', 'v', 'x', 'l', 'c', 'd', 'm']
+      if (Array.from(this.input).reduce((current, char) => validNumerals.includes(char.toLowerCase()) ? current : false, true)) {
+        console.log('numeral')
+        this.result = this.fromRomanNumeral(this.input);
+      } else if (parseInt(this.input) + "" == this.input) { // checks if input contains an integer
+        console.log(this.input)
+        this.result = this.toRomanNumeral(this.input).toUpperCase();
+      } else { // otherwise input is invalid
+        this.result = "";
+      }
     }
   }
 })
