@@ -4,10 +4,21 @@
 <head>
   <meta charset="utf-8">
   <title>Nolan Barry OIT Programming Assignment</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body id="home">
+  <div id='app'>
+    <div class='container'>
+      <input type='text' v-model="fromInput" @keyUp="convertFrom" />
+      <p>{{from}}</p>
+    </div>
+    <div class='container'>
+      <input type='text' v-model="toInput" @keyUp="convertTo" />
+      <p>{{to}}</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
   <script src='script.js'></script>
 </body>
 
